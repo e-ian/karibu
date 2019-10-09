@@ -65,4 +65,13 @@ class Users:
 
     def verify_password(self, data, db_data):
         return check_password_hash(data, db_data)
+
+    def login_user(self, data):
+        """ method to login in registered users"""
+        query = "SELECT * FROM users WHERE email='{}'".format(
+            data['email'])
+        dictcur.execute(query)
+        login = dictcur.fetchone()
+        return login
+
     
