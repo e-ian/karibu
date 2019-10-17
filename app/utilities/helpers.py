@@ -18,7 +18,6 @@ class Secure_jwt:
         }
         return jwt.encode(payload, 'akokoro', algorithm='HS256')
 
-
 jwt_instance = Secure_jwt()
 
 def protected(f):
@@ -26,11 +25,15 @@ def protected(f):
     @wraps(f)
     def decorator(*args, **kwargs):
         access_token = None
+        print(request.headers)
         if 'Authorization' in request.headers:
             access_token = request.headers['Authorization']
-        if not access_token:
+            if not access_token:
+                return jsonify(
+                    {'status': 401, 'error': 'Missing authorization token'}), 401
+        else:
             return jsonify(
-                {'status': 401, 'error': 'Missing authorization token'}), 401
+                    {'status': 400, 'error': 'Missing authorization header'}), 400
 
         try:
             payload = jwt.decode(access_token, 'akokoro', algorithms=['HS256'])

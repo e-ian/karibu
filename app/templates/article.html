@@ -1,0 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+New Post
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <form class="form-post" method="POST" action="/article">
+        <h2 class="form-signing-heading">New Post</h2>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.title) }}
+        {{ wtf.form_field(form.content) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Post</button>
+    </form>
+
+</div>
+{% endblock %}

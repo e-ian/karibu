@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+{% include "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='home.css')}}">
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ post.created_on.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('article.get_articles', article_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

@@ -24,7 +24,8 @@ class Database:
 
     def create_user_table(self):
         user_table = "CREATE TABLE IF NOT EXISTS users(user_id serial PRIMARY KEY, \
-            username varchar(50), email varchar(30), password varchar(256), created_on TIMESTAMP DEFAULT NOW())"
+            username varchar(50) UNIQUE, email varchar(30) UNIQUE, \
+                password varchar(256), created_on TIMESTAMP DEFAULT NOW())"
 
         self.cur.execute(user_table)
 
