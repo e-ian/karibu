@@ -3,16 +3,16 @@
 module config to configure database
 """
 class Config:
-    """
-    parent config class
-    """
+    
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Alimanu195ogwal@localhost:5432/kaributest'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     DEBUG = False
-    dbname = "karibu"
+    dbname = "kaributest"
 
 class DevelopmentConfig(Config):
-    """
-    class for development configuration
-    """
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Alimanu195ogwal@localhost:5432/kaributest'
+    # SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True
 
 class TestingConfig(Config):

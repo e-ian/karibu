@@ -1,4 +1,3 @@
-from app import Database
 from flask import Flask
 
 from app import create_app
