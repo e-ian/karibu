@@ -1,20 +1,40 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block title %}
-New Post
-{% endblock %}
-
+{% extends "layout.html" %}
 {% block content %}
-<div class="container">
-
-    <form class="form-post" method="POST" action="/article">
-        <h2 class="form-signing-heading">New Post</h2>
+<div class="content-section">
+    <form method="POST" action="/article">
         {{ form.hidden_tag() }}
-        {{ wtf.form_field(form.title) }}
-        {{ wtf.form_field(form.content) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Post</button>
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Post</legend>
+            <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}
+                {% if form.title.errors %}
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Post</button>
+        </div>
     </form>
-
 </div>
-{% endblock %}
+{% endblock content %}

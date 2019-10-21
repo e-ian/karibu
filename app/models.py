@@ -15,6 +15,7 @@ class Users(UserMixin, db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(200), unique=True)
     email = db.Column(db.String(200), unique=True)
+    image_file = db.Column(db.String(20), default='default.jpg')
     password = db.Column(db.String(200), unique=True)
 
     def get_id(self):
