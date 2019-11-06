@@ -1,0 +1,27 @@
+language: python
+
+python:
+  - "3.6"
+
+services:
+- postgresql
+
+env:
+  global:
+    - Testingenv = "EnvTests"
+
+install:
+  - pip install -r requirements.txt
+  - pip install coverage
+  - pip install coveralls
+  - pip install pytest
+
+before_script:
+  - psql -c 'create database karibu;' -U postgres
+  - psql -c 'create database kaributest;' -U postgres
+
+script:
+  - pytest tests --cov=app --cov-report term-missing
+
+after_success:
+- coveralls
